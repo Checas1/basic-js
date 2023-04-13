@@ -13,27 +13,19 @@ function transform(array) {
       currentArray.splice(counter - 1, 2) : currentArray.splice(counter, 1)
     }else if(currentArray[counter] == actions[1]) {
       if(counter == 0 || counter - 1 == modification) {
-        currentArray.splice(counter, 1)
-        counter -= 1
+        currentArray.splice(counter, 1), counter -= 1
       }else if(counter >= 1) {
         currentArray.splice(counter, 1, currentArray[counter - 1])
         modification = counter
       }
     }else if(currentArray[counter] == actions[2]) {
-      if (counter != currentArray.length - 1) {
-        currentArray.splice(counter, 2)
-        counter -= 1
-        modification = counter
-      }else{
-        currentArray.splice(counter, 1)
-      }
+      (counter == currentArray.length - 1) ?
+        currentArray.splice(counter, 1) :
+        currentArray.splice(counter, 2), counter -= 1, modification = counter
     }else if(currentArray[counter] == actions[3]) {
-      if(counter != currentArray.length - 1) {
-        currentArray.splice(counter, 1, currentArray[counter + 1])
-        modification = counter
-      }else{
-        currentArray.splice(counter, 1)
-      }
+      (counter == currentArray.length - 1) ?
+        currentArray.splice(counter, 1) :
+        currentArray.splice(counter, 1, currentArray[counter + 1]), modification = counter
     }
     counter++
   }
