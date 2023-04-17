@@ -1,25 +1,59 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-/**
- * Create a repeating string based on the given parameters
- *  
- * @param {String} str string to repeat
- * @param {Object} options options object 
- * @return {String} repeating string
- * 
- *
- * @example
- * 
- * repeater('STRING', { repeatTimes: 3, separator: '**', 
- * addition: 'PLUS', additionRepeatTimes: 3, additionSeparator: '00' })
- * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
- *
- */
-function repeater(/* str, options */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
 
+function repeater(string, options) {
+  let repeatTimes,
+      separator,
+      addition,
+      additionRepeatTimes,
+      additionSeparator
+
+  if (options.repeatTimes == undefined){
+    repeatTimes = '1'
+  }else{
+    repeatTimes = options.repeatTimes
+  }
+
+  if (options.separator == undefined){
+    separator = '+'
+  }else{
+    separator = options.separator
+  }
+
+  if (options.addition === undefined){
+    addition = ''
+  }else{
+    addition = options.addition
+  }
+
+  if ( options.additionRepeatTimes == undefined){
+    additionRepeatTimes = '1'
+  }else{
+    additionRepeatTimes = options.additionRepeatTimes
+  }
+
+  if (options.additionSeparator == undefined){
+    additionSeparator = '|'
+  }else{
+    additionSeparator = options.additionSeparator
+  }
+
+  let resultArray = [],
+      tmpArray = [],
+      firstCounter = 0
+  while(firstCounter < additionRepeatTimes){
+    tmpArray.push('' + addition)
+    firstCounter++
+  }
+  let secondCounter = 0,
+      tmpStr = ''
+  tmpStr = string + tmpArray.join(additionSeparator)
+  while(secondCounter < repeatTimes){
+    resultArray.push(tmpStr)
+    secondCounter++
+  }
+  return resultArray.join(separator);
+}
 module.exports = {
   repeater
 };
